@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>情景背词</title>
+  <style>
+    body { font-family: sans-serif; background: #f5f7fa; margin: 0; }
+    .header { background: #dbeafe; padding: 20px; display: flex; justify-content: space-between; }
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
+    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+    .card h3 { margin: 0 0 4px; }
+    .card small { color: #666; }
+    .search { margin: 12px 16px; }
+    .search input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h2>情景背词</h2>
+      <small>英语学习逆袭bot</small>
+    </div>
+    <div>📚</div>
+  </div>
+
+  <div class="search">
+    <input placeholder="搜索单词、专区、课程..." />
+  </div>
+
+  <div class="card-grid">
+    <div class="card" onclick="alert('进入雅思专区')">
+      <h3>雅思专区</h3>
+      <small>情景故事词汇</small>
+    </div>
+    <div class="card" onclick="alert('进入考研专区')">
+      <h3>考研专区</h3>
+      <small>核心高频词汇</small>
+    </div>
+    <div class="card" onclick="alert('进入GRE专区')">
+      <h3>GRE 专区</h3>
+      <small>硬核词库</small>
+    </div>
+    <div class="card" onclick="alert('进入四级专区')">
+      <h3>四级专区</h3>
+      <small>基础通关</small>
+    </div>
+  </div>
+
+  <script>
+    // 以后这里写"切换Tab、判分、存本地单词本"的逻辑
+    console.log("页面跑起来了");
+  </script>
+</body>
+</html>
