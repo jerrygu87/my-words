@@ -1,408 +1,314 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>情景背词 - 英语学习逆袭bot</title>
-    <style>
-        /* 基础样式重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <title>情景背词</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f8ff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .header {
+      background: linear-gradient(135deg, #e6f0ff, #ffffff);
+      padding: 16px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #003366;
+    }
+    .header p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #666;
+    }
+    .search-bar {
+      margin: 16px auto;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 20px;
+      padding: 8px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      padding: 8px;
+    }
+    .search-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #888;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+      padding: 0 16px;
+    }
+    .tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tab.active {
+      background: #007aff;
+      color: white;
+      border-color: #007aff;
+    }
+    .zones {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 0 16px;
+      margin-bottom: 80px; /* 给底部留出空间 */
+    }
+    .zone-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .zone-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #003366;
+    }
+    .zone-card p {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: #666;
+    }
+    .zone-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .zone-card .arrow {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: #f0f5ff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #007aff;
+    }
 
-        body {
-            background-color: #f8f9fc;
-            color: #333;
-        }
+    /* 底部功能区 */
+    .bottom-features {
+      background: #f5f8ff;
+      padding: 16px 0;
+      border-top: 1px solid #e0e6f0;
+      position: fixed;
+      bottom: 60px;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    }
+    .features-row {
+      display: flex;
+      justify-content: space-around;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .feature-item {
+      text-align: center;
+    }
+    .feature-item .icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .feature-item .label {
+      font-size: 12px;
+      color: #333;
+    }
+    .feature-item .sub {
+      font-size: 10px;
+      color: #888;
+    }
 
-        /* 顶部 Header */
-        .header {
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            padding: 20px 20px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 背景装饰图 (用渐变模拟) */
-        .header::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            background-color: #4a7aff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .header-text h1 {
-            font-size: 28px;
-            color: #1a237e;
-            margin-bottom: 5px;
-        }
-
-        .header-text p {
-            font-size: 16px;
-            color: #3949ab;
-            font-weight: 500;
-        }
-
-        /* 搜索框 */
-        .search-bar {
-            margin-top: 20px;
-            background: white;
-            border-radius: 25px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .search-bar input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 16px;
-            color: #666;
-            padding-left: 10px;
-        }
-
-        .search-bar input::placeholder {
-            color: #ccc;
-        }
-
-        /* 标签栏 */
-        .tabs {
-            display: flex;
-            overflow-x: auto;
-            padding: 15px 20px 10px;
-            gap: 10px;
-            background: #f8f9fc;
-        }
-
-        .tab {
-            padding: 8px 20px;
-            border-radius: 20px;
-            white-space: nowrap;
-            font-size: 14px;
-            cursor: pointer;
-            border: 1px solid #e0e0e0;
-            background: white;
-            color: #555;
-            transition: all 0.3s;
-        }
-
-        .tab.active {
-            background: #4a7aff;
-            color: white;
-            border-color: #4a7aff;
-        }
-
-        /* 专区卡片网格 */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 0 20px 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            min-height: 160px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* 模拟不同专区的背景色 */
-        .card.ielts { background: linear-gradient(to bottom right, #e3f2fd, #bbdefb); }
-        .card.graduate { background: linear-gradient(to bottom right, #f3e5f5, #e1bee7); }
-        .card.gre { background: linear-gradient(to bottom right, #e8f5e9, #c8e6c9); }
-        .card.cet4 { background: linear-gradient(to bottom right, #e0f7fa, #b2ebf2); }
-        .card.cet6 { background: linear-gradient(to bottom right, #fff3e0, #ffe0b2); }
-        .card.tem4 { background: linear-gradient(to bottom right, #fce4ec, #f8bbd0); }
-        .card.toefl { background: linear-gradient(to bottom right, #e8eaf6, #c5cae9); }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .card-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #1a237e;
-        }
-
-        .card-subtitle {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        /* 模拟图片占位符 */
-        .card-image {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 10px;
-            align-self: flex-end;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: #999;
-        }
-
-        .arrow {
-            width: 30px;
-            height: 30px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4a7aff;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* 底部导航栏 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            border-top: 1px solid #eee;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #999;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: #4a7aff;
-        }
-
-        .nav-icon {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-
-        /* 中间功能区 */
-        .features {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-            background: white;
-            margin-top: 20px;
-            border-radius: 15px;
-            margin: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            color: #555;
-        }
-
-        .feature-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-            color: #4a7aff;
-        }
-        
-        .feature-text {
-            font-size: 12px;
-        }
-
-    </style>
+    /* 底部导航栏 */
+    .bottom-nav {
+      background: white;
+      padding: 8px 0;
+      border-top: 1px solid #e0e6f0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    }
+    .nav-item {
+      text-align: center;
+    }
+    .nav-item .icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .nav-item .label {
+      font-size: 12px;
+      color: #333;
+    }
+    .nav-item.active .label {
+      color: #007aff;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- 顶部 Header -->
-    <div class="header">
-        <div class="header-content">
-            <div class="logo">L</div> <!-- 模拟书本Logo -->
-            <div class="header-text">
-                <h1>情景背词</h1>
-                英语学习逆袭bot
-            </div>
-        </div>
-        <div class="search-bar">
-            <span>🔍</span>
-            <input type="text" placeholder="搜索单词、专区、课程...">
-        </div>
+  <!-- 头部 -->
+  <div class="header">
+    <h1>情景背词</h1>
+    英语学习逆袭bot
+  </div>
+
+  <!-- 搜索框 -->
+  <div class="search-bar">
+    <input type="text" placeholder="搜索单词、专区、课程...">
+    <button>🔍</button>
+  </div>
+
+  <!-- 标签页 -->
+  <div class="tabs">
+    <div class="tab active">全部</div>
+    <div class="tab">雅思</div>
+    <div class="tab">考研</div>
+    <div class="tab">GRE</div>
+    <div class="tab">四级</div>
+    <div class="tab">六级</div>
+    <div class="tab">专四</div>
+    <div class="tab">托福</div>
+  </div>
+
+  <!-- 专区卡片（这里放你的图片！） -->
+  <div class="zones">
+    <!-- 雅思专区 -->
+    <div class="zone-card">
+      <h3>雅思专区</h3>
+      情景故事词汇
+      <img src="images/ielts.png" alt="雅思插画">
+      <div class="arrow">→</div>
     </div>
 
-    <!-- 标签栏 -->
-    <div class="tabs">
-        <div class="tab active">全部</div>
-        <div class="tab">雅思</div>
-        <div class="tab">考研</div>
-        <div class="tab">GRE</div>
-        <div class="tab">四级</div>
-        <div class="tab">六级</div>
-        <div class="tab">专四</div>
-        <div class="tab">托福</div>
+    <!-- 考研专区 -->
+    <div class="zone-card">
+      <h3>考研专区</h3>
+      核心高频词汇
+      <img src="images/kaoyan.png" alt="考研插画">
+      <div class="arrow">→</div>
     </div>
 
-    <!-- 专区卡片网格 -->
-    <div class="grid-container">
-        <!-- 雅思专区 -->
-        <div class="card ielts">
-            <div>
-                <div class="card-title">雅思专区</div>
-                <div class="card-subtitle">情景故事词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- 考研专区 -->
-        <div class="card graduate">
-            <div>
-                <div class="card-title">考研专区</div>
-                <div class="card-subtitle">核心高频词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- GRE专区 -->
-        <div class="card gre">
-            <div>
-                <div class="card-title">GRE专区</div>
-                <div class="card-subtitle">学术场景词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- 四级专区 -->
-        <div class="card cet4">
-            <div>
-                <div class="card-title">四级专区</div>
-                <div class="card-subtitle">生活高频词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- 六级专区 -->
-        <div class="card cet6">
-            <div>
-                <div class="card-title">六级专区</div>
-                <div class="card-subtitle">阅读核心词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- 专四专区 -->
-        <div class="card tem4">
-            <div>
-                <div class="card-title">专四专区</div>
-                <div class="card-subtitle">专业进阶词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
-
-        <!-- 托福专区 -->
-        <div class="card toefl">
-            <div>
-                <div class="card-title">托福专区</div>
-                <div class="card-subtitle">学术应用词汇</div>
-            </div>
-            <div class="card-image">[图]</div>
-            <div class="arrow">></div>
-        </div>
+    <!-- GRE专区 -->
+    <div class="zone-card">
+      <h3>GRE专区</h3>
+      学术场景词汇
+      <img src="images/gre.png" alt="GRE插画">
+      <div class="arrow">→</div>
     </div>
 
-    <!-- 中间功能区 (情景阅读等) -->
-    <div class="features">
-        <div class="feature-item">
-            <div class="feature-icon">📖</div>
-            <div class="feature-text">情景阅读沉浸式学习</div>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">🎧</div>
-            <div class="feature-text">单词点读发音跟读</div>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">📊</div>
-            <div class="feature-text">词卡复习高效记忆</div>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">🎯</div>
-            <div class="feature-text">科学复习抗遗忘曲线</div>
-        </div>
+    <!-- 四级专区 -->
+    <div class="zone-card">
+      <h3>四级专区</h3>
+      生活高频词汇
+      <img src="images/sijiji.png" alt="四级插画">
+      <div class="arrow">→</div>
     </div>
 
-    <!-- 底部导航栏 -->
-    <div class="bottom-nav">
-        <div class="nav-item active">
-            <div class="nav-icon">🏠</div>
-            <div>首页</div>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">🧩</div>
-            <div>专区</div>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">🃏</div>
-            <div>词卡</div>
-        </div>
-        <div class="nav-item">
-            <div class="nav-icon">👤</div>
-            <div>我的</div>
-        </div>
+    <!-- 六级专区 -->
+    <div class="zone-card">
+      <h3>六级专区</h3>
+      阅读核心词汇
+      <img src="images/liuji.png" alt="六级插画">
+      <div class="arrow">→</div>
     </div>
+
+    <!-- 专四专区 -->
+    <div class="zone-card">
+      <h3>专四专区</h3>
+      专业进阶词汇
+      <img src="images/tem4.png" alt="专四插画">
+      <div class="arrow">→</div>
+    </div>
+
+    <!-- 托福专区 -->
+    <div class="zone-card">
+      <h3>托福专区</h3>
+      学术应用词汇
+      <img src="images/tuofu.png" alt="托福插画">
+      <div class="arrow">→</div>
+    </div>
+  </div>
+
+  <!-- 底部功能区 -->
+  <div class="bottom-features">
+    <div class="features-row">
+      <div class="feature-item">
+        <div class="icon">📖</div>
+        <div class="label">情景阅读</div>
+        <div class="sub">沉浸式学习</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🎧</div>
+        <div class="label">单词点读</div>
+        <div class="sub">发音跟读</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📝</div>
+        <div class="label">词卡复习</div>
+        <div class="sub">高效记忆</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🎯</div>
+        <div class="label">科学复习</div>
+        <div class="sub">抗遗忘曲线</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航栏 -->
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <div class="icon">🏠</div>
+      <div class="label">首页</div>
+    </div>
+    <div class="nav-item">
+      <div class="icon">🧩</div>
+      <div class="label">专区</div>
+    </div>
+    <div class="nav-item">
+      <div class="icon">📋</div>
+      <div class="label">词卡</div>
+    </div>
+    <div class="nav-item">
+      <div class="icon">👤</div>
+      <div class="label">我的</div>
+    </div>
+  </div>
 
 </body>
 </html>
