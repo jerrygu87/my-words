@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>我的单词本｜情景背词</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/wordbook.css">
+  <link rel="stylesheet" href="css/reader.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">📚</span>情景背词</a>
+    <nav class="top-nav">
+      <a href="index.html">首页</a>
+      <a href="toefl.html">托福故事</a>
+      <a class="active" href="wordbook.html">我的单词本</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="wordbook-hero">
+    <h1>📖 我的单词本</h1>
+    <p class="muted">在第一章点击“加入单词本”的词，会自动出现在这里。</p>
+  </section>
+
+  <section class="card stats">
+    <div class="stat"><strong id="total-count">0</strong><span>总单词数</span></div>
+    <div class="stat"><strong id="learning-count">0</strong><span>学习中</span></div>
+    <div class="stat"><strong id="mastered-count">0</strong><span>已掌握</span></div>
+  </section>
+
+  <section class="card filters">
+    <input id="book-search" type="search" placeholder="搜索单词或中文释义">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="new">新加入</button>
+    <button class="filter-btn" data-filter="learning">学习中</button>
+    <button class="filter-btn" data-filter="mastered">已掌握</button>
+    <button id="clear-book" class="danger-btn">清空</button>
+  </section>
+
+  <section id="book-grid" class="book-grid"></section>
+</main>
+<script src="js/storage.js"></script>
+<script src="js/wordbook.js"></script>
+</body>
+</html>

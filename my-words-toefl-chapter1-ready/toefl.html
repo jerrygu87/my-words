@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>托福故事｜情景背词</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/toefl.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">📚</span>情景背词</a>
+    <nav class="top-nav">
+      <a href="index.html">首页</a>
+      <a class="active" href="toefl.html">托福故事</a>
+      <a href="wordbook.html">我的单词本</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="container page-hero">
+    <span class="badge">TOEFL</span>
+    <h1>托福情景故事</h1>
+    <p>先上线第一章，完成“阅读 → 点击单词 → 收藏”的完整流程。</p>
+  </section>
+
+  <section class="container story-list">
+    <article class="card story-card">
+      <div>
+        <span class="badge">免费学习</span>
+        <h2>Chapter 1：烤糊的面包与油腻的天花板</h2>
+        <p>林浩然被困在混乱的酒店后厨，在烤糊的面包、坏掉的空调和老板的训斥之间，开始重新思考自己的未来。</p>
+        <div class="story-meta">
+          <span>📚 1章</span><span>🔤 100个重点词</span><span>⏱ 约15分钟</span><span>📱 支持手机</span>
+        </div>
+        <div class="progress-box">
+          <div class="progress-track"><div id="story-progress" class="progress-bar"></div></div>
+          <div id="progress-label" class="progress-label">尚未开始</div>
+        </div>
+      </div>
+      <div class="story-actions">
+        <a class="primary-btn" href="reader.html">开始学习</a>
+        <a class="ghost-btn" href="assets/chapter1.pdf" target="_blank">查看原PDF</a>
+      </div>
+    </article>
+  </section>
+</main>
+<script>
+  try{
+    const saved=JSON.parse(localStorage.getItem("myWords.reader.toefl-chapter-1")||"null");
+    const value=Math.round(saved?.percent||0);
+    document.querySelector("#story-progress").style.width=value+"%";
+    document.querySelector("#progress-label").textContent=value>0?`上次阅读到 ${value}%`:"尚未开始";
+    document.querySelector(".primary-btn").textContent=value>0?"继续学习":"开始学习";
+  }catch{}
+</script>
+</body>
+</html>

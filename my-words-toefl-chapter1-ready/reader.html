@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chapter 1：烤糊的面包与油腻的天花板</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/reader.css">
+</head>
+<body>
+<div id="reading-progress" class="progress-line"></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="toefl.html"><span class="brand-mark">←</span>返回故事列表</a>
+    <nav class="top-nav">
+      <a href="index.html">首页</a>
+      <a class="active" href="reader.html">第一章</a>
+      <a href="wordbook.html">我的单词本</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="container reader-hero">
+    <div class="series">《穷小子出国记：从后厨到餐馆老板》</div>
+    <h1>Chapter 1：烤糊的面包与油腻的天花板</h1>
+    <div class="sub">学习版 · 在语境中背单词 · 共100个重点词</div>
+  </section>
+
+  <div class="container card reader-toolbar">
+    <button id="toggle-meaning" class="ghost-btn">中 <span class="label-text">隐藏中文</span></button>
+    <button id="toggle-highlight" class="ghost-btn">🖍 <span class="label-text">隐藏重点词</span></button>
+    <button id="font-down" class="ghost-btn">A-</button>
+    <button id="font-up" class="ghost-btn">A+</button>
+    <button id="toggle-original" class="secondary-btn">📄 <span class="label-text">原稿对照</span></button>
+    <span class="spacer"></span>
+    <a class="primary-btn" href="wordbook.html">📖 <span class="label-text">我的单词本</span></a>
+    <button id="mobile-word-toggle" class="primary-btn mobile-word-handle">🔤 词汇表</button>
+  </div>
+
+  <div class="container reader-layout">
+    <article class="card story-panel">
+      <div class="story-note">
+        使用方法：点击粉色重点词，右侧会定位到对应词卡；点击喇叭可听发音，点击“加入单词本”可收藏。页面会自动保存阅读位置。
+      </div>
+      <div id="story-content"></div>
+      <div class="copyright-note">
+        内容署名与版权提示：小红书“英语世界bot”，原创作品，已进行版权登记，禁止转售，侵权必究。本站页面保留原稿署名，并提供原PDF对照。
+      </div>
+    </article>
+
+    <aside id="side-panel" class="card side-panel">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <strong style="color:var(--ink);font-size:18px">本章重点词（100）</strong>
+        <span style="flex:1"></span>
+        <button id="close-word-panel" class="icon-btn mobile-word-handle">×</button>
+      </div>
+      <div class="word-search"><input id="word-search" type="search" placeholder="搜索英文或中文释义"></div>
+      <div id="word-list" class="word-list"></div>
+    </aside>
+  </div>
+
+  <section id="original-section" class="container card original-section" hidden>
+    <h2>原稿对照</h2>
+    <p class="muted">以下为PDF第1—6页原稿图片，便于核对排版和内容。完整文件可 <a style="color:#8b3db0;font-weight:700" href="assets/chapter1.pdf" target="_blank">打开原PDF</a>。</p>
+    <div class="original-grid">
+      <img src="assets/chapter1-pages/page-01.webp" alt="第一章原稿第1页">
+      <img src="assets/chapter1-pages/page-02.webp" alt="第一章原稿第2页">
+      <img src="assets/chapter1-pages/page-03.webp" alt="第一章原稿第3页">
+      <img src="assets/chapter1-pages/page-04.webp" alt="第一章原稿第4页">
+      <img src="assets/chapter1-pages/page-05.webp" alt="第一章原稿第5页">
+      <img src="assets/chapter1-pages/page-06.webp" alt="第一章原稿第6页">
+    </div>
+    <h2 style="margin-top:28px">原版词汇表</h2>
+    <div class="original-grid">
+      <img src="assets/chapter1-pages/page-10.webp" alt="词汇表第1页">
+      <img src="assets/chapter1-pages/page-11.webp" alt="词汇表第2页">
+      <img src="assets/chapter1-pages/page-12.webp" alt="词汇表第3页">
+      <img src="assets/chapter1-pages/page-13.webp" alt="词汇表第4页">
+      <img src="assets/chapter1-pages/page-14.webp" alt="词汇表第5页">
+    </div>
+  </section>
+</main>
+<script src="js/chapter1-data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/reader.js"></script>
+</body>
+</html>

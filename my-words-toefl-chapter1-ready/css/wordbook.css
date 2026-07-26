@@ -1,0 +1,21 @@
+
+.wordbook-hero{padding:38px 0 20px;text-align:center}
+.wordbook-hero h1{margin:0;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px;margin-bottom:16px}
+.stat{text-align:center;padding:14px;border-radius:16px;background:#faf7ff}
+.stat strong{display:block;font-size:28px;color:var(--pink)}
+.stat span{font-size:12px;color:#8a92a3}
+.filters{display:flex;gap:9px;flex-wrap:wrap;padding:15px;margin-bottom:16px}
+.filters input{flex:1;min-width:220px;border:1px solid #e0d4e9;border-radius:12px;padding:11px 13px}
+.filter-btn{border:1px solid #e0d4e9;background:white;color:#6e7788;border-radius:12px;padding:9px 13px}
+.filter-btn.active{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;border-color:transparent}
+.book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-bottom:60px}
+.book-card{padding:18px}
+.book-card-head{display:flex;align-items:center;gap:10px}
+.book-card h2{margin:0;color:var(--ink);font-size:20px;flex:1}
+.book-card p{margin:10px 0;color:#697284}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.status-select{border:1px solid #ddd0e7;border-radius:10px;padding:8px;background:white}
+.small-btn{border:0;border-radius:10px;padding:8px 10px;background:#edf4ff;color:#356db8}
+.small-btn.delete{background:#fff0f3;color:#cf4164}
+@media(max-width:700px){.book-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr}}
